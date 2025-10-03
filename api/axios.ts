@@ -17,6 +17,16 @@ export const setAuthToken = (token: string | null) => {
         delete api.defaults.headers.common['Authorization'];
         localStorage.removeItem('token');
     }
+    api.interceptors.response.use(
+        response => response,
+        error => {
+            if (error.response?.status === 401) {
+                setAuthToken(null);
+                window.location.href = '/login';
+            }
+            return Promise.reject(error);
+        }
+    )
 };
 
 export default api;
