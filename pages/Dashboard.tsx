@@ -8,7 +8,6 @@ import LogoutButton from '../components/LogoutButton';
 
 const Dashboard: React.FC = () => {
     const { users, loading: userLoading, error: userError } = useUsers();
-    // const [userId, setUserId] = useState<number | null>(null);
 
     const [userId, setUserId] = useState<number | null>(() => {
         const stored = localStorage.getItem('selectedUserId');
@@ -47,7 +46,7 @@ const Dashboard: React.FC = () => {
     return (
         <div style={{ padding: '2rem' }}>
             <h1>My Workouts</h1>
-            <p>✅ Dashboard component loaded</p>
+            <p>Dashboard component loaded</p>
             {token && <LogoutButton />}
             <UserSelect
                 users={users}
@@ -60,6 +59,7 @@ const Dashboard: React.FC = () => {
             {error && <p style={{ color: 'red' }}>Error: {error}</p>}
 
             <WorkoutForms onSubmit={addWorkout} />
+            <LogoutButton />
             <WorkoutList
                 workouts={workouts}
                 onUpdate={editWorkout}
